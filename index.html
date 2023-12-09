@@ -117,20 +117,22 @@
     let tg = window.Telegram.WebApp; //получаем объект webapp телеграма 
     tg.expand(); //расширяем на все окно  
 
-    let bookBtn = document.getElementById('book-btn');
-    bookBtn.onclick = highlightSelectedCells;  
 
-    bookBtn.addEventListener("click", () => {
-      
-      tg.sendData(JSON.stringify(cellIds));
-      console.log('tg.sendData: ', JSON.stringify(cellIds));
-
-      tg.close();
-    });
 
 
     window.onload = function() {
 
+      let bookBtn = document.getElementById('book-btn');
+      bookBtn.onclick = highlightSelectedCells;  
+
+      bookBtn.addEventListener("click", () => {
+        
+        tg.sendData(JSON.stringify(cellIds));
+        console.log('tg.sendData: ', JSON.stringify(cellIds));
+
+        tg.close();
+      });  
+          
       let cells = document.querySelectorAll('td:not(.occupied)');
 
       let selectedCells = [];
