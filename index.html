@@ -117,76 +117,51 @@
     let tg = window.Telegram.WebApp; //получаем объект webapp телеграма 
     tg.expand(); //расширяем на все окно  
 
-
-
-
     window.onload = function() {
-
-      let bookBtn = document.getElementById('book-btn');
-      // bookBtn.onclick = highlightSelectedCells;  
-
-      bookBtn.addEventListener("click", () => {
+        let bookBtn = document.getElementById('book-btn');
+        // bookBtn.onclick = highlightSelectedCells;  
         
-        tg.sendData(JSON.stringify(cellIds));
-        console.log('tg.sendData: ', JSON.stringify(cellIds));
+        bookBtn.addEventListener("click", () => {
+            tg.sendData(JSON.stringify(cellIds));
+            console.log('tg.sendData: ', JSON.stringify(cellIds));
+            tg.close();
+        });  
 
-        tg.close();
-      });  
+        let cells = document.querySelectorAll('td:not(.occupied)');
+        let selectedCells = [];
+        let cellIds = [];
+        let selectedCellDiv = document.createElement('div');
+        selectedCellDiv.id = 'selected-cells';
+        document.body.append(selectedCellDiv);
 
-      let cells = document.querySelectorAll('td:not(.occupied)');
+        for(let cell of cells) {
+            cell.addEventListener('click', function() {
+                let cellId = this.id; 
 
-      let selectedCells = [];
+                if(this.style.backgroundColor == '') {
+                    console.log('Before select: ', selectedCells);
+                    this.style.backgroundColor = 'yellow';
+                    selectedCells.push(cellId);
+                    console.log('After select: ', selectedCells);
+                } else {
+                    console.log('Before deselect: ', selectedCells);
+                    this.style.backgroundColor = '';
+                    selectedCells = selectedCells.filter(id => id !== cellId);  
+                    console.log('After deselect: ', selectedCells);
+                }
 
-      let selectedCellDiv = document.createElement('div');
-      selectedCellDiv.id = 'selected-cells';
-      document.body.append(selectedCellDiv);
+                updateSelectedCells();
+            });
+        }
 
-      for(let cell of cells) {
-
-        cell.addEventListener('click', function() {
-
-          let cellId = this.id; 
-
-          if(this.style.backgroundColor == '') {
-            
-            console.log('Before select: ', selectedCells);
-            
-            this.style.backgroundColor = 'yellow';
-            
-            selectedCells.push(cellId);
-            
-            console.log('After select: ', selectedCells);
-            
-          } else {
-            
-            console.log('Before deselect: ', selectedCells);
-            
-            this.style.backgroundColor = '';
-            
-            selectedCells = selectedCells.filter(id => id !== cellId);  
-            
-            console.log('After deselect: ', selectedCells);
-            
-          }
-          
-          updateSelectedCells();
-          
-        });
-
-      }
-
-      function updateSelectedCells() {
-
-        console.log('Update cells called'); 
-        
-        let cellIds = selectedCells.join(', ');
-        
-        selectedCellDiv.innerHTML = cellIds;
-        
-      }
-
+        function updateSelectedCells() {
+            console.log('Update cells called'); 
+            cellIds = selectedCells.join(', ');
+            selectedCellDiv.innerHTML = cellIds;
+        }
     }
-  </script>
+</script>
+
 
 </body>
 </html>
