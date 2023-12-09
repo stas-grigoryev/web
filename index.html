@@ -34,6 +34,25 @@
     .occupied {
       background-color: red;
     }
+
+    #book-btn {
+      display: block;
+      margin: 20px auto 0;
+      
+      padding: 10px 15px;
+      border: none;
+      
+      color: black;
+      background: green;
+      
+      border-radius: 15px;
+      cursor: pointer;
+    }
+
+    #book-btn:active {
+      background: black;
+      color: green; 
+  }
   </style>
   
 </head>
@@ -91,9 +110,15 @@
   
   <div id="selected-cell">Ваш выбор: </div>
   
+  
+  <button id="book-btn">Забронировать</button>
+  
   <script>
     let tg = window.Telegram.WebApp; //получаем объект webapp телеграма 
     tg.expand(); //расширяем на все окно  
+
+    let bookBtn = document.getElementById('book-btn');
+    bookBtn.onclick = highlightSelectedCells;  
 
     window.onload = function() {
 
