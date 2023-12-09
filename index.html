@@ -10,10 +10,10 @@
     }
 
     table {
-      border-width: 4px;
+      /* border-width: 4px;
       border-style: solid;
       border-color: black;
-      border-radius: 15px;
+      border-radius: 15px; */
     }
 
     td, th {
@@ -94,38 +94,57 @@
 
     window.onload = function() {
 
-    let cells = document.querySelectorAll('td:not(.occupied)');
-    let selectedCells = [];
+      let cells = document.querySelectorAll('td:not(.occupied)');
 
-    for(let cell of cells) {
-      cell.addEventListener('click', function() {
-      
-        let cellId = this.id;
-        
-        if(this.style.backgroundColor == '') {
-          this.style.backgroundColor = 'yellow';
-          selectedCells.push(cellId);  
-        } else {
-          this.style.backgroundColor = '';
-          selectedCells = selectedCells.filter(id => id !== cellId);
-        }
+      let selectedCells = [];
 
-        updateSelectedCells();
-        
-      });
-    }
+      let selectedCellDiv = document.createElement('div');
+      selectedCellDiv.id = 'selected-cells';
+      document.body.append(selectedCellDiv);
 
-    function updateSelectedCells() {
-      console.log('Update cells called');
-      let selectedCellDiv = document.getElementById('selected-cells');
-      if(!selectedCellDiv) {
-        return;  
+      for(let cell of cells) {
+
+        cell.addEventListener('click', function() {
+
+          let cellId = this.id; 
+
+          if(this.style.backgroundColor == '') {
+            
+            console.log('Before select: ', selectedCells);
+            
+            this.style.backgroundColor = 'yellow';
+            
+            selectedCells.push(cellId);
+            
+            console.log('After select: ', selectedCells);
+            
+          } else {
+            
+            console.log('Before deselect: ', selectedCells);
+            
+            this.style.backgroundColor = '';
+            
+            selectedCells = selectedCells.filter(id => id !== cellId);  
+            
+            console.log('After deselect: ', selectedCells);
+            
+          }
+          
+          updateSelectedCells();
+          
+        });
+
       }
-      
-      let cellIds = selectedCells.join(', '); 
-      selectedCellDiv.innerHTML = "cellIds";
-      
-    }
+
+      function updateSelectedCells() {
+
+        console.log('Update cells called'); 
+        
+        let cellIds = selectedCells.join(', ');
+        
+        selectedCellDiv.innerHTML = cellIds;
+        
+      }
 
     }
   </script>
