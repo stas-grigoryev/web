@@ -42,7 +42,7 @@
       padding: 10px 15px;
       border: none;
       
-      color: black;
+      color:aliceblue; 
       background: green;
       
       border-radius: 15px;
@@ -51,7 +51,7 @@
 
     #book-btn:active {
       background: black;
-      color: green; 
+      color:aliceblue; 
   }
   </style>
   
@@ -119,6 +119,15 @@
 
     let bookBtn = document.getElementById('book-btn');
     bookBtn.onclick = highlightSelectedCells;  
+
+    bookBtn.addEventListener("click", () => {
+      
+      tg.sendData(JSON.stringify(cellIds));
+      console.log('tg.sendData: ', JSON.stringify(cellIds));
+
+      tg.close();
+    });
+
 
     window.onload = function() {
 
