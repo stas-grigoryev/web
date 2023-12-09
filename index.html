@@ -515,7 +515,8 @@
   <div id="date">Ваш выбор: </div> 
   
   <button id="book-btn">Забронировать</button>
-  // !@!@!@!@!@!@!@!@!@!
+  
+  
   <script>
     var paramsString = document.location.search;  
     var searchParams = new URLSearchParams(paramsString);
@@ -523,7 +524,7 @@
 
     let data = JSON.parse(searchParams.get("data"));
     
-    document.getElementById("date").innerHTML = "data[319]"; 
+    document.getElementById("date").innerHTML = data[319]; 
 
     //  
     let cells = document.querySelectorAll('td:not(.occupied)');
