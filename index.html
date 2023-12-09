@@ -60,9 +60,6 @@
 
   <table> 
     <tr>
-      <th id="date">ДАТА</th>
-    </tr>
-    <tr>
       <th style=width: 250px>Время/Дорожки</th>
       <th>1</th>
       <th>2</th>  
@@ -509,7 +506,7 @@
 
     let data = JSON.parse(searchParams.get("data"));
     
-    document.getElementById("date").innerHTML = data[336]; 
+    document.getElementById("date").innerHTML = data[336] + " Время/Дорожки"; 
 
     //  
     let cells = document.querySelectorAll('td:not(.occupied)');
