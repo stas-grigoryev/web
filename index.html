@@ -2,95 +2,84 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>ТАБЛИЦА</title>
-  <link href="style.css" rel="stylesheet" />
+  <title>Таблица</title>
+  <style>
+    td, th {
+      width: 50px; 
+    }
+    
+    td {
+      text-align: center;
+    }
+    
+    .occupied {
+      background-color: red;
+    }
+  </style>
 </head>
 <body>
+
   <table>
     <tr>
       <th>Время/Дорожки</th>
       <th>1</th>
-      <th>2</th>
+      <th>2</th>  
       <th>3</th>
       <th>4</th>
       <th>5</th>
-      <th>6</th>
-      <th>7</th>
-      <th>8</th>
-      <th>9</th>
-      <th>10</th>
-      <th>11</th>
-      <th>12</th>
     </tr>
     <tr>
       <td>10:00 - 10:30</td>
-      <td colspan="12">Х</td>
-      <td colspan="12">Х</td>
-      <td colspan="12">Х</td>
-      <td colspan="12">Х</td>
-      <td colspan="12">Х</td>
-      <td colspan="12">Х</td>
-      <td colspan="12"></td>
-      <td colspan="12"></td>
-      <td colspan="12"></td>
-      <td colspan="12">Х</td>
-      <td colspan="12">Х</td>
-      <td colspan="12">Х</td>      
+      <td class="occupied" id="cell-1">X</td>  
+      <td id="cell-2"></td>
+      <td class="occupied" id="cell-3">X</td>
+      <td class="occupied" id="cell-4">X</td>
+      <td class="occupied" id="cell-5">X</td>
     </tr>
     <tr>
       <td>10:30 - 11:00</td>
-      <td colspan="12"></td>
-      <td colspan="12">Х</td>
-      <td colspan="12">Х</td>
-      <td colspan="12"></td>
-      <td colspan="12">Х</td>
-      <td colspan="12"></td>
-      <td colspan="12"></td>
-      <td colspan="12"></td>
-      <td colspan="12">Х</td>
-      <td colspan="12"></td>
-      <td colspan="12">Х</td>
-      <td colspan="12">Х</td>
+      <td id="cell-6"></td>
+      <td class="occupied" id="cell-7">X</td>
+      <td class="occupied" id="cell-8">X</td>
+      <td id="cell-9"></td>
+      <td class="occupied" id="cell-10">X</td>
     </tr>
     <tr>
       <td>11:00 - 11:30</td>
-      <td colspan="12">X</td>
-      <td colspan="12">Х</td>
-      <td colspan="12">Х</td>
-      <td colspan="12"></td>
-      <td colspan="12">Х</td>
-      <td colspan="12">Х</td>
-      <td colspan="12"></td>
-      <td colspan="12"></td>
-      <td colspan="12"></td>
-      <td colspan="12"></td>
-      <td colspan="12"></td>
-      <td colspan="12">Х</td>    </tr>
+      <td id="cell-11"></td>
+      <td id="cell-12"></td>
+      <td id="cell-13"></td>
+      <td id="cell-14"></td>  
+      <td class="occupied" id="cell-15">X</td>
+    </tr>
     <tr>
       <td>11:30 - 12:00</td>
-      <td colspan="12"></td>
-      <td colspan="12">Х</td>
-      <td colspan="12">Х</td>
-      <td colspan="12">Х</td>
-      <td colspan="12"></td>
-      <td colspan="12">Х</td>
-      <td colspan="12">Х</td>
-      <td colspan="12">Х</td>
-      <td colspan="12"></td>
-      <td colspan="12">Х</td>
-      <td colspan="12"></td>
-      <td colspan="12">Х</td>    </tr>
-    
+      <td id="cell-16"></td>
+      <td class="occupied" id="cell-17">X</td>
+      <td class="occupied" id="cell-18">X</td>
+      <td id="cell-19"></td>
+      <td class="occupied" id="cell-20">X</td> 
+    </tr>
   </table>
   
+  <div id="selected-cell"></div>
+  
   <script>
-    let cells = document.getElementsByTagName('td');
-
+    let cells = document.querySelectorAll('td:not(.occupied)');
+    
     for(let cell of cells) {
       cell.addEventListener('click', function() {
-        this.style.backgroundColor = this.style.backgroundColor === 'red' ? '' : 'red';
-      }); 
+        let cellId = this.id;
+        
+        let selectedCellDiv = document.getElementById('selected-cell');
+        if(selectedCellDiv.innerHTML == '') {
+          selectedCellDiv.innerHTML = cellId;
+        } else {
+          selectedCellDiv.innerHTML = '';
+        }
+      });
     }
   </script>
+
 </body>
 </html>
