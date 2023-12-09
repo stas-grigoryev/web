@@ -73,28 +73,41 @@
   <div id="selected-cell">ПУСТО</div>
   
   <script>
+    window.onload = function() {
+
     let cells = document.querySelectorAll('td:not(.occupied)');
     let selectedCells = [];
-    
+
     for(let cell of cells) {
       cell.addEventListener('click', function() {
+      
         let cellId = this.id;
         
         if(this.style.backgroundColor == '') {
           this.style.backgroundColor = 'yellow';
-          selectedCells.push(cellId);
+          selectedCells.push(cellId);  
         } else {
           this.style.backgroundColor = '';
-          selectedCells = selectedCells.filter(id => id !== cellId); 
+          selectedCells = selectedCells.filter(id => id !== cellId);
         }
 
         updateSelectedCells();
+        
       });
     }
 
     function updateSelectedCells() {
-      let cellIds = selectedCells.join(', ');
-      document.getElementById('selected-cells').innerHTML = cellIds; 
+      
+      let selectedCellDiv = document.getElementById('selected-cells');
+      if(!selectedCellDiv) {
+        return;  
+      }
+      
+      let cellIds = selectedCells.join(', '); 
+      selectedCellDiv.innerHTML = cellIds;
+      
+    }
+
     }
   </script>
 
