@@ -3,9 +3,14 @@
 <head>
   <meta charset="utf-8">
   <title>Таблица</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
+    body {
+      background-color: aliceblue;
+    }
+
     td, th {
-      width: 50px; 
+      width: 100px; 
     }
     
     td {
@@ -17,12 +22,13 @@
       background-color: red;
     }
   </style>
+  
 </head>
 <body>
 
   <table style="border: 4px; border-radius: 15px;" > 
     <tr>
-      <th style=width: 100px>Время/Дорожки</th>
+      <th style=width: 150px>Время/Дорожки</th>
       <th>1</th>
       <th>2</th>  
       <th>3</th>
@@ -73,6 +79,9 @@
   <div id="selected-cell">ПУСТО</div>
   
   <script>
+    let tg = window.Telegram.WebApp; //получаем объект webapp телеграма 
+    tg.expand(); //расширяем на все окно  
+
     window.onload = function() {
 
     let cells = document.querySelectorAll('td:not(.occupied)');
