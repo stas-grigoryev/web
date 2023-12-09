@@ -10,6 +10,7 @@
     
     td {
       text-align: center;
+      background-color: greenyellow;
     }
     
     .occupied {
@@ -21,12 +22,19 @@
 
   <table>
     <tr>
-      <th>Время/Дорожки</th>
+      <th style=width: 100px>Время/Дорожки</th>
       <th>1</th>
       <th>2</th>  
       <th>3</th>
       <th>4</th>
       <th>5</th>
+      <th>1</th>
+      <th>2</th>  
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>1</th>
+      <th>2</th>
     </tr>
     <tr>
       <td>10:00 - 10:30</td>
@@ -66,18 +74,27 @@
   
   <script>
     let cells = document.querySelectorAll('td:not(.occupied)');
+    let selectedCells = [];
     
     for(let cell of cells) {
       cell.addEventListener('click', function() {
         let cellId = this.id;
         
-        let selectedCellDiv = document.getElementById('selected-cell');
-        if(selectedCellDiv.innerHTML == '') {
-          selectedCellDiv.innerHTML = cellId;
+        if(this.style.backgroundColor == '') {
+          this.style.backgroundColor = 'yellow';
+          selectedCells.push(cellId);
         } else {
-          selectedCellDiv.innerHTML = '';
+          this.style.backgroundColor = '';
+          selectedCells = selectedCells.filter(id => id !== cellId); 
         }
+
+        updateSelectedCells();
       });
+    }
+
+    function updateSelectedCells() {
+      let cellIds = selectedCells.join(', ');
+      document.getElementById('selected-cells').innerHTML = cellIds; 
     }
   </script>
 
