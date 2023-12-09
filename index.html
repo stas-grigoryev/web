@@ -76,19 +76,35 @@
     </tr>
     <tr>
       <td class="occupied" style="background-color: aliceblue;">10:00 - 10:30</td>
-      <td class="occupied" id="cell-1">X</td>  
+      <td class="occupied" id="1-10_00-10_30">X</td>  
       <td id="cell-2"></td>
-      <td class="occupied" id="cell-3">X</td>
-      <td class="occupied" id="cell-4">X</td>
-      <td class="occupied" id="cell-5">X</td>
+      <td class="occupied" id="2-10_00-10_30">X</td>
+      <td class="occupied" id="3-10_00-10_30">X</td>
+      <td class="occupied" id="4-10_00-10_30">X</td>
+      <td id="5-10_00-10_30"></td>
+      <td id="6-10_00-10_30"></td>
+      <td id="7-10_00-10_30"></td>
+      <td id="8-10_00-10_30"></td>
+      <td id="9-10_00-10_30"></td>
+      <td id="10-10_00-10_30"></td>
+      <td id="11-10_00-10_30"></td>
+      <td id="12-10_00-10_30"></td>
     </tr>
     <tr>
       <td class="occupied" style="background-color: aliceblue;">10:30 - 11:00</td>
-      <td id="cell-6"></td>
-      <td class="occupied" id="cell-7">X</td>
-      <td class="occupied" id="cell-8">X</td>
-      <td id="cell-9"></td>
-      <td class="occupied" id="cell-10">X</td>
+      <td class="occupied" id="1-10_30-11_00">X</td>  
+      <td id="cell-2"></td>
+      <td class="occupied" id="2-10_30-11_00">X</td>
+      <td class="occupied" id="3-10_30-11_00"></td>
+      <td class="occupied" id="4-10_30-11_00">X</td>
+      <td id="5-10_30-11_00"></td>
+      <td id="6-10_30-11_00"></td>
+      <td id="7-10_30-11_00"></td>
+      <td id="8-10_30-11_00"></td>
+      <td id="9-10_30-11_00">X</td>
+      <td id="10-10_30-11_00"></td>
+      <td id="11-10_30-11_00"></td>
+      <td id="12-10_30-11_00"></td>
     </tr>
     <tr>
       <td class="occupied" style="background-color: aliceblue;">11:00 - 11:30</td>
@@ -130,6 +146,8 @@
         let cells = document.querySelectorAll('td:not(.occupied)');
         let selectedCells = [];
         let cellIds = [];
+        
+        // ВЫВОД ячеек
         let selectedCellDiv = document.createElement('div');
         selectedCellDiv.id = 'selected-cells';
         document.body.append(selectedCellDiv);
