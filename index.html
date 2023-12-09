@@ -17,8 +17,10 @@
     }
 
     td, th {
+      text-size-adjust: 8px;
       width: 100px;
       border: 1px solid black; 
+      border-radius: 15px;
     }
     
     td {
@@ -114,7 +116,7 @@
     }
 
     function updateSelectedCells() {
-      
+      console.log('Update cells called');
       let selectedCellDiv = document.getElementById('selected-cells');
       if(!selectedCellDiv) {
         return;  
