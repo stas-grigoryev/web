@@ -592,17 +592,17 @@
 
     window.onload = function() {
         let bookBtn = document.getElementById('book-btn');
-        // bookBtn.onclick = highlightSelectedCells;  
+        let cells = document.querySelectorAll('td:not(.occupied)');
+        let selectedCells = [];
+        let cellIds = []; 
         
         bookBtn.addEventListener("click", () => {
-            tg.sendData(JSON.stringify(cellIds));
-            console.log('tg.sendData: ', JSON.stringify(cellIds));
+            tg.sendData(JSON.stringify(selectedCells));
+            console.log('tg.sendData: ', JSON.stringify(selectedCells));
             tg.close();
         });  
 
-        let cells = document.querySelectorAll('td:not(.occupied)');
-        let selectedCells = [];
-        let cellIds = [];
+
         
         for(let cell of cells) {
             cell.addEventListener('click', function() {
