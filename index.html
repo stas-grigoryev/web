@@ -116,13 +116,13 @@
 <body>
   <div id="clock">
     <div class="display">
-      <span id="ddmmyy">ДД.ММ.ГГГГ</span> <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+      <span id="ddmmyy">ДД.ММ.ГГГГ</span> <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span><br>Расписание на: <span id="date">0000</span>
     </div>
   </div>
 
   <table> 
     <tr>
-      <th id="date" style="font-weight: 200; font-size: 12px; background-color: var(--tg-theme-button-color); color: var(--tg-theme-button-text-color);">Время/Дорожки</th>
+      <th style="font-weight: 200; font-size: 12px; background-color: var(--tg-theme-button-color); color: var(--tg-theme-button-text-color);">Время/Дорожки</th>
       <th>1</th>
       <th>2</th>  
       <th>3</th>
@@ -579,7 +579,7 @@
 
     let data = JSON.parse(searchParams.get("data"));
     
-    document.getElementById("date").innerHTML = searchParams.get("date") + " Время/Дорожки"; 
+    document.getElementById("date").innerHTML = searchParams.get("date"); 
 
   
     //  
