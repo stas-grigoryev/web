@@ -539,11 +539,6 @@
         let selectedCells = [];
         let cellIds = [];
         
-        // ВЫВОД ячеек
-        let selectedCellDiv = document.createElement('div');
-        selectedCellDiv.id = 'selected-cells';
-        document.body.append(selectedCellDiv);
-
         for(let cell of cells) {
             cell.addEventListener('click', function() {
                 let cellId = this.id; 
