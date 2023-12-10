@@ -26,7 +26,7 @@
       padding: 2px;
       text-align: center; 
       width: 100px;
-      border: 1px solid black; 
+      border: 1px solid var(--tg-theme-text-color); 
       border-radius: 15px;
       height: 25px;
       vertical-align: middle; 
@@ -81,8 +81,7 @@
       font-family: 'Orbitron', sans-serif;
       font-size: 0.5em;
       color: var(--tg-theme-text-color);
-      text-shadow: 0 0 10px #0cf;
-      
+            
       width: 10%;
       text-align: center;
       
@@ -90,7 +89,7 @@
       padding: 0px;
  
       opacity: 0;
-      animation: fadeIn 1s ease forwards;
+      animation: fadeIn 5s ease forwards;
     }
 
     @keyframes fadeIn {
@@ -112,7 +111,7 @@
 
   <table> 
     <tr>
-      <th id="date" style="background-color: blue; color: aliceblue;">Время/Дорожки</th>
+      <th id="date" style="background-color: var(--tg-theme-button-color); color: var(--tg-theme-button-text-color);">Время/Дорожки</th>
       <th>1</th>
       <th>2</th>  
       <th>3</th>
