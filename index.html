@@ -54,9 +54,29 @@
       color:black; 
   }
   </style>
-  
+  <style>
+    #clock {
+      text-align: center;
+      font-size: 2em; 
+      font-family: Orbitron; 
+      letter-spacing: 7px;
+    }
+    
+    .display {
+      display: inline-block;
+      padding: 20px;
+      border-radius: 10px;
+      background: #000;
+      color: #0f0;
+    }
+  </style>
 </head>
 <body>
+  <div id="clock">
+    <div class="display">
+      <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+    </div>
+  </div>
 
   <table> 
     <tr>
@@ -498,8 +518,17 @@
   <!-- <div id="selected-cell">Ваш выбор: </div> -->
   <button id="book-btn">Забронировать</button>
   
-  
   <script>
+    function updateTime() {
+      var dt = new Date();
+      
+      document.getElementById("hours").textContent = dt.getHours().toString().padStart(2, "0");
+      document.getElementById("minutes").textContent = dt.getMinutes().toString().padStart(2, "0"); 
+      document.getElementById("seconds").textContent = dt.getSeconds().toString().padStart(2, "0");
+    }
+
+    setInterval(updateTime, 1000);
+
     var paramsString = document.location.search;  
     var searchParams = new URLSearchParams(paramsString);
     console.log('data: ', searchParams.get("data"));
@@ -509,6 +538,7 @@
     
     document.getElementById("date").innerHTML = searchParams.get("date") + " Время/Дорожки"; 
 
+  
     //  
     let cells = document.querySelectorAll('td:not(.occupied)');
     cells.forEach((cell, index) => {
