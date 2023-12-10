@@ -77,6 +77,30 @@
       background: var(--tg-theme-button-color);
       color: var(--tg-theme-button-text-color);
     }
+    #times {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.5em;
+      color: var(--tg-theme-text-color);
+      text-shadow: 0 0 10px #0cf;
+      
+      width: 10%;
+      text-align: center;
+      
+      background-color: var(--tg-theme-bg-color);
+      padding: 0px;
+ 
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;  
+      }
+    }
   </style>
 </head>
 <body>
@@ -103,7 +127,7 @@
       <th>12</th>
     </tr>
     <tr>
-      <td class="occupied" style="background-color: aliceblue;">10:00-10:30</td>
+      <td id="times" class="occupied">10:00-10:30</td>
       <td id="1-10:00-10:30"></td>  
       <td id="2-10:00-10:30"></td>
       <td id="3-10:00-10:30"></td>
