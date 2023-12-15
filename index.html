@@ -605,15 +605,17 @@
     window.onload = function() {
         let bookBtn = document.getElementById('book-btn');
         let cells = document.querySelectorAll('td:not(.occupied)');
-        let selectedCells = [];
+        let firstParts = [];
+        let secondParts = [];
+        let zakaz_data = [];
         let cellIds = []; 
         
         bookBtn.addEventListener("click", () => {
-            const data = {
+            const zakaz_data = {
               firstParts,
               secondParts 
             };
-            tg.sendData(JSON.stringify(data));
+            tg.sendData(JSON.stringify(zakaz_data));
             console.log('tg.sendData: ', JSON.stringify(data));
             tg.close();
         });  
@@ -634,7 +636,7 @@
                 
                 firstParts.push(firstPart);
                 secondParts.push(secondPart);
-                console.log('After select: ', {firstParts, secondParts});
+                console.log('After select: ', firstParts, secondParts);
 
               } else {
 
@@ -642,7 +644,7 @@
                 
                 firstParts = firstParts.filter(id => id !== firstPart);
                 secondParts = secondParts.filter(id => id !== secondPart); 
-                console.log('After deselect: ', {firstParts, secondParts});
+                console.log('After deselect: ', firstParts, secondParts);
 
 
               }
@@ -650,6 +652,7 @@
           });
 
         }
+      }    
   </script>
 
 
