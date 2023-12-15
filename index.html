@@ -627,7 +627,7 @@
               let cellId = this.id;
               
               const idSplitIndex = cellId.indexOf('_');
-              const firstPart = cellId.substring(0, idSplitIndex);
+              const firstPart = parseInt(cellId.substring(0, idSplitIndex));
               const secondPart = cellId.substring(idSplitIndex + 1);
 
               if(this.style.backgroundColor == '') {
