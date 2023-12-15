@@ -617,31 +617,34 @@
 
         
         for(let cell of cells) {
-            cell.addEventListener('click', function() {
-                let cellId = this.id; 
 
-                if(this.style.backgroundColor == '') {
-                    console.log('Before select: ', selectedCells);
-                    this.style.backgroundColor = 'blue';
-                    selectedCells.push(cellId);
-                    console.log('After select: ', selectedCells);
-                } else {
-                    console.log('Before deselect: ', selectedCells);
-                    this.style.backgroundColor = '';
-                    selectedCells = selectedCells.filter(id => id !== cellId);  
-                    console.log('After deselect: ', selectedCells);
-                }
+        cell.addEventListener('click', function() {
 
-                // updateSelectedCells();
+              let cellId = this.id;
+              
+              const idSplitIndex = cellId.indexOf('_');
+              const firstPart = cellId.substring(0, idSplitIndex);
+              const secondPart = cellId.substring(idSplitIndex + 1);
+
+              if(this.style.backgroundColor == '') {
+                  
+                this.style.backgroundColor = 'blue';
+                
+                firstParts.push(firstPart);
+                secondParts.push(secondPart);
+                
+              } else {
+
+                this.style.backgroundColor = '';
+                
+                firstParts = firstParts.filter(id => id !== firstPart);
+                secondParts = secondParts.filter(id => id !== secondPart); 
+
+              }
+
             });
-        }
 
-        function updateSelectedCells() {
-            console.log('Update cells called'); 
-            cellIds = selectedCells;
-            selectedCellDiv.innerHTML = cellIds;
         }
-    }
 </script>
 
 
