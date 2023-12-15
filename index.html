@@ -609,16 +609,18 @@
         let cellIds = []; 
         
         bookBtn.addEventListener("click", () => {
-            tg.sendData(JSON.stringify(selectedCells));
-            console.log('tg.sendData: ', JSON.stringify(selectedCells));
+            const data = {
+              firstParts,
+              secondParts 
+            };
+            tg.sendData(JSON.stringify(data));
+            console.log('tg.sendData: ', JSON.stringify(data));
             tg.close();
         });  
-
-
-        
+      
         for(let cell of cells) {
 
-        cell.addEventListener('click', function() {
+          cell.addEventListener('click', function() {
 
               let cellId = this.id;
               
@@ -632,17 +634,20 @@
                 
                 firstParts.push(firstPart);
                 secondParts.push(secondPart);
-                
+                console.log('After select: ', {firstParts, secondParts});
+
               } else {
 
                 this.style.backgroundColor = '';
                 
                 firstParts = firstParts.filter(id => id !== firstPart);
                 secondParts = secondParts.filter(id => id !== secondPart); 
+                console.log('After deselect: ', {firstParts, secondParts});
+
 
               }
 
-            });
+          });
 
         }
 </script>
