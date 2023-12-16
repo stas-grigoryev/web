@@ -578,21 +578,15 @@
     <button id="book-btn">Забронировать</button>
   </div>
   
-<table>
+  <table>
     <tr>
-      <td style="background-color: rgb(238, 255, 0); color: black;">* Детские дорожки - 9/10/11/12</td>
-      <td style="background-color: red; color: aliceblue;">Дорожка занята</td>  
-      <td style="background-color: chartreuse; color: black;">Дорожка свободна</td>
-      <td style="background-color: blue; color: aliceblue;">Дорожка выбрана</td>
+      <td id="times" class="occupied" style="background-color: rgb(238, 255, 0); color: black;">* Детские дорожки - 9/10/11/12</td>
+      <td id="times" class="occupied" style="background-color: red; color: aliceblue;">Дорожка занята</td>  
+      <td id="times" class="occupied" style="background-color: chartreuse; color: black;">Дорожка свободна</td>
+      <td id="times" class="occupied" style="background-color: blue; color: aliceblue;">Дорожка выбрана</td>
     </tr>
   </table>
 
-  <div style="background-color: rgb(238, 255, 0); color: black;">   * Детские дорожки - 9/10/11/12   </div>
-  <div style="background-color: red; color: aliceblue;">   Дорожка занята   </div>
-  <div style="background-color: chartreuse; color: black;">   Дорожка свободна   </div>
-  <div style="background-color: blue; color: aliceblue;">   Дорожка выбрана   </div>
-  
-  
   <script>
     function updateTime() {
       var dt = new Date();
