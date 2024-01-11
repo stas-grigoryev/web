@@ -155,15 +155,15 @@
       <td id="times" class="occupied">10:00-10:30</td>
       <td id="0_1-10:00-10:30"></td>  
       <td id="1_2-10:00-10:30"></td>
-      <td id="2-3-10:00-10:30"></td>
-      <td id="3-4-10:00-10:30"></td>
-      <td id="4-5-10:00-10:30"></td>
-      <td id="5-6-10:00-10:30"></td>
-      <td id="6-7-10:00-10:30"></td>
-      <td id="7-8-10:00-10:30"></td>
-      <td id="8-9-10:00-10:30"></td>
-      <td id="9-10-10:00-10:30"></td>
-      <td id="10-11-10:00-10:30"></td>
+      <td id="2_3-10:00-10:30"></td>
+      <td id="3_4-10:00-10:30"></td>
+      <td id="4_5-10:00-10:30"></td>
+      <td id="5_6-10:00-10:30"></td>
+      <td id="6_7-10:00-10:30"></td>
+      <td id="7_8-10:00-10:30"></td>
+      <td id="8_9-10:00-10:30"></td>
+      <td id="9_10-10:00-10:30"></td>
+      <td id="10_11-10:00-10:30"></td>
       <td id="11_12-10:00-10:30"></td>
     </tr>
     <tr>
@@ -588,16 +588,16 @@
   </table>
 
   <script>
-    function updateTime() {
-      var dt = new Date();
+    // function updateTime() {
+    //   var dt = new Date();
 
-      document.getElementById("ddmmyy").textContent = dt.getDate() + '.' + dt.getMonth() + '.' + dt.getFullYear().toString().padStart(2, "0");
-      document.getElementById("hours").textContent = dt.getHours().toString().padStart(2, "0");
-      document.getElementById("minutes").textContent = dt.getMinutes().toString().padStart(2, "0"); 
-      document.getElementById("seconds").textContent = dt.getSeconds().toString().padStart(2, "0");
-    }
+    //   document.getElementById("ddmmyy").textContent = dt.getDate() + '.' + dt.getMonth() + '.' + dt.getFullYear().toString().padStart(2, "0");
+    //   document.getElementById("hours").textContent = dt.getHours().toString().padStart(2, "0");
+    //   document.getElementById("minutes").textContent = dt.getMinutes().toString().padStart(2, "0"); 
+    //   document.getElementById("seconds").textContent = dt.getSeconds().toString().padStart(2, "0");
+    // }
 
-    setInterval(updateTime, 1000);
+    // setInterval(updateTime, 1000);
 
     var paramsString = document.location.search;  
     var searchParams = new URLSearchParams(paramsString);
@@ -659,7 +659,7 @@
                 
                 firstParts.push(firstPart);
                 secondParts.push(secondPart);
-                console.log('After select: ', firstParts, secondParts);
+                console.log('After select: ', firstParts, secondParts, cellId);
 
               } else {
 
