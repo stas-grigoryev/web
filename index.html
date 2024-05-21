@@ -637,15 +637,39 @@
         
         // При клике на кнопку "бронь"...
         bookBtn.addEventListener("click", () => {
-            // Создание объекта с данными бронирования
-            const zakaz_data = {
+            let trackNumbers = [];
+            let startTimes = [];
+            let endTimes = [];
+            
+            secondParts.forEach(item => {
+                let parts = item.split("-");
+                let trackNumber = parseInt(parts[0]);
+                
+                if(!trackNumbers.includes(trackNumber)){
+                    trackNumbers.push(trackNumber);
+                }
+                
+                startTimes.push(parts[1]);
+                endTimes.push(parts[2]);
+            });
+            
+        		let minStartTime = `${searchParams.get("date")}T${startTimes.sort()[0]}`; 
+        		let maxEndTime = `${searchParams.get("date")}T${endTimes.sort()[endTimes.length - 1]}`;
+
+            const bookingDetails = [
+                searchParams.get("date"),
+                minStartTime, 
+                maxEndTime, 
+                trackNumbers
+            ];
+		
+            zakaz_data = {
               firstParts,
-              secondParts 
+              secondParts,
+              bookingDetails 
             };
-            // Отправка данных бронирования в телеграм
             tg.sendData(JSON.stringify(zakaz_data));
-            console.log('tg.sendData: ', JSON.stringify(data));
-            // Закрытие телеграм-приложения
+            console.log('tg.sendData: ', JSON.stringify(zakaz_data));
             tg.close();
         });  
       
