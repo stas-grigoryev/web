@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Таблица</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Play:wght@400;500;700&display=swap');
+
+    body{
+      color: var(--tg-theme-text-color);
+      background: var(--tg-theme-bg-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: Play; 
+    }
+
+    table {
+      /* border-width: 4px;
+      border-style: solid;
+      border-color: black;
+      border-radius: 15px; */
+    }
+
+    tr {
+      opacity: 0;
+      animation: fadeIn 5s ease forwards;
+    }
+
+    td, th {
+      font-size: 10px; 
+      padding: 2px;
+      text-align: center; 
+      width: 7%;
+      border: 1px solid var(--tg-theme-text-color); 
+      border-radius: 10px;
+      height: 25px;
+      vertical-align: middle; 
+    }
+    
+    td {
+      background-color:darkgrey;
+    }
+    
+    .occupied {
+      background-color: red;
+    }
+
+    .freetime {
+      background-color:chartreuse;
+    }
+
+    #book-btn {
+      display: block;
+      margin: 20px auto 0;
+      
+      padding: 10px 15px;
+      border: none;
+      
+      font-family: Play, sans-serif;
+      color: var(--tg-theme-button-text-color);
+      background: var(--tg-theme-button-color);
+      
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    #book-btn:active {
+      background: greenyellow;
+      color:black;
+      font-family: Play, sans-serif; 
+  }
+
+    #clock {
+      text-align: center;
+      font-size: 24px; 
+      font-family: Play; 
+      font-weight: 400;
+      width: 100%;
+
+    }
+    
+    .display {
+      display: inline-block;
+      padding: 20px;
+      border-radius: 10px;
+      background: var(--tg-theme-button-color);
+      color: var(--tg-theme-button-text-color);
+    }
+
+    #times {
+      font-family: Play, sans-serif;
+      font-size: 10px;
+      color: var(--tg-theme-text-color);
+            
+      width: 15%;
+      text-align: center;
+      
+      background-color: var(--tg-theme-bg-color);
+      padding: 0px;
+ 
+
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;  
+      }
+    }
+
+    #children {
+      font-size: 10px; 
+      padding: 2px;
+      text-align: center; 
+      width: 7%;
+      border: 1px solid var(--tg-theme-text-color); 
+      border-radius: 10px;
+      height: 25px;
+      vertical-align: middle; 
+      color: black;
+      background-color: rgb(238, 255, 0);
+    }  
+  </style>
+</head>
+<body>
+  <div id="clock">
+    <div class="display">
+      Расписание на: <span id="date">0000</span>
+    </div>
+  </div>
+
+  <table> 
+    <tr>
+      <th style="font-weight: 200; font-size: 12px; background-color: var(--tg-theme-button-color); color: var(--tg-theme-button-text-color);">Время/Дорожки</th>
+      <th>1</th>
+      <th>2</th>  
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>  
+      <th>8</th>
+      <th id="children">9*</th>
+      <th id="children">10*</th>
+      <th id="children">11*</th>
+      <th id="children">12*</th>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">10:00-10:30</td>
+      <td id="0_1-10:00-10:30"></td>  
+      <td id="1_2-10:00-10:30"></td>
+      <td id="2_3-10:00-10:30"></td>
+      <td id="3_4-10:00-10:30"></td>
+      <td id="4_5-10:00-10:30"></td>
+      <td id="5_6-10:00-10:30"></td>
+      <td id="6_7-10:00-10:30"></td>
+      <td id="7_8-10:00-10:30"></td>
+      <td id="8_9-10:00-10:30"></td>
+      <td id="9_10-10:00-10:30"></td>
+      <td id="10_11-10:00-10:30"></td>
+      <td id="11_12-10:00-10:30"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">10:30-11:00</td>
+      <td id="12_1-10:30-11:00"></td>  
+      <td id="13_2-10:30-11:00"></td>
+      <td id="14_3-10:30-11:00"></td>
+      <td id="15_4-10:30-11:00"></td>
+      <td id="16_5-10:30-11:00"></td>
+      <td id="17_6-10:30-11:00"></td>
+      <td id="18_7-10:30-11:00"></td>
+      <td id="19_8-10:30-11:00"></td>
+      <td id="20_9-10:30-11:00"></td>
+      <td id="21_10-10:30-11:00"></td>
+      <td id="22_11-10:30-11:00"></td>
+      <td id="23_12-10:30-11:00"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">11:00-11:30</td>
+      <td id="24_1-11:00-11:30"></td>  
+      <td id="25_2-11:00-11:30"></td>
+      <td id="26_3-11:00-11:30"></td>
+      <td id="27_4-11:00-11:30"></td>
+      <td id="28_5-11:00-11:30"></td>
+      <td id="29_6-11:00-11:30"></td>
+      <td id="30_7-11:00-11:30"></td>
+      <td id="31_8-11:00-11:30"></td>
+      <td id="32_9-11:00-11:30"></td>
+      <td id="33_10-11:00-11:30"></td>
+      <td id="34_11-11:00-11:30"></td>
+      <td id="35_12-11:00-11:30"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">11:30-12:00</td>
+      <td id="36_1-11:30-12:00"></td>  
+      <td id="37_2-11:30-12:00"></td>
+      <td id="38_3-11:30-12:00"></td>
+      <td id="39_4-11:30-12:00"></td>
+      <td id="40_5-11:30-12:00"></td>
+      <td id="41_6-11:30-12:00"></td>
+      <td id="42_7-11:30-12:00"></td>
+      <td id="43_8-11:30-12:00"></td>
+      <td id="44_9-11:30-12:00"></td>
+      <td id="45_10-11:30-12:00"></td>
+      <td id="46_11-11:30-12:00"></td>
+      <td id="47_12-11:30-12:00"></td>
+    </tr> 
+    <tr>
+      <td id="times" class="occupied">12:00-12:30</td>
+      <td id="48_1-12:00-12:30"></td>  
+      <td id="49_2-12:00-12:30"></td>
+      <td id="50_3-12:00-12:30"></td>
+      <td id="51_4-12:00-12:30"></td>
+      <td id="52_5-12:00-12:30"></td>
+      <td id="53_6-12:00-12:30"></td>
+      <td id="54_7-12:00-12:30"></td>
+      <td id="55_8-12:00-12:30"></td>
+      <td id="56_9-12:00-12:30"></td>
+      <td id="57_10-12:00-12:30"></td>
+      <td id="58_11-12:00-12:30"></td>
+      <td id="59_12-12:00-12:30"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">12:30-13:00</td>
+      <td id="60_1-12:30-13:00"></td>  
+      <td id="61_2-12:30-13:00"></td>
+      <td id="62_3-12:30-13:00"></td>
+      <td id="63_4-12:30-13:00"></td>
+      <td id="64_5-12:30-13:00"></td>
+      <td id="65_6-12:30-13:00"></td>
+      <td id="66_7-12:30-13:00"></td>
+      <td id="67_8-12:30-13:00"></td>
+      <td id="68_9-12:30-13:00"></td>
+      <td id="69_10-12:30-13:00"></td>
+      <td id="70_11-12:30-13:00"></td>
+      <td id="71_12-12:30-13:00"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">13:00-13:30</td>
+      <td id="72_1-13:00-13:30"></td>  
+      <td id="73_2-13:00-13:30"></td>
+      <td id="74_3-13:00-13:30"></td>
+      <td id="75_4-13:00-13:30"></td>
+      <td id="76_5-13:00-13:30"></td>
+      <td id="77_6-13:00-13:30"></td>
+      <td id="78_7-13:00-13:30"></td>
+      <td id="79_8-13:00-13:30"></td>
+      <td id="80_9-13:00-13:30"></td>
+      <td id="81_10-13:00-13:30"></td>
+      <td id="82_11-13:00-13:30"></td>
+      <td id="83_12-13:00-13:30"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">13:30-14:00</td>
+      <td id="84_1-13:30-14:00"></td>  
+      <td id="85_2-13:30-14:00"></td>
+      <td id="86_3-13:30-14:00"></td>
+      <td id="87_4-13:30-14:00"></td>
+      <td id="88_5-13:30-14:00"></td>
+      <td id="89_6-13:30-14:00"></td>
+      <td id="90_7-13:30-14:00"></td>
+      <td id="91_8-13:30-14:00"></td>
+      <td id="92_9-13:30-14:00"></td>
+      <td id="93_10-13:30-14:00"></td>
+      <td id="94_11-13:30-14:00"></td>
+      <td id="95_12-13:30-14:00"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">14:00-14:30</td>
+      <td id="96_1-14:00-14:30"></td>  
+      <td id="97_2-14:00-14:30"></td>
+      <td id="98_3-14:00-14:30"></td>
+      <td id="99_4-14:00-14:30"></td>
+      <td id="100_5-14:00-14:30"></td>
+      <td id="101_6-14:00-14:30"></td>
+      <td id="102_7-14:00-14:30"></td>
+      <td id="103_8-14:00-14:30"></td>
+      <td id="104_9-14:00-14:30"></td>
+      <td id="105_10-14:00-14:30"></td>
+      <td id="106_11-14:00-14:30"></td>
+      <td id="107_12-14:00-14:30"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">14:30-15:00</td>
+      <td id="108_1-14:30-15:00"></td>  
+      <td id="109_2-14:30-15:00"></td>
+      <td id="110_3-14:30-15:00"></td>
+      <td id="111_4-14:30-15:00"></td>
+      <td id="112_5-14:30-15:00"></td>
+      <td id="113_6-14:30-15:00"></td>
+      <td id="114_7-14:30-15:00"></td>
+      <td id="115_8-14:30-15:00"></td>
+      <td id="116_9-14:30-15:00"></td>
+      <td id="117_10-14:30-15:00"></td>
+      <td id="118_11-14:30-15:00"></td>
+      <td id="119_12-14:30-15:00"></td>
+    </tr>   <tr>
+      <td id="times" class="occupied">15:00-15:30</td>
+      <td id="120_1-15:00-15:30"></td>  
+      <td id="121_2-15:00-15:30"></td>
+      <td id="122_3-15:00-15:30"></td>
+      <td id="123_4-15:00-15:30"></td>
+      <td id="124_5-15:00-15:30"></td>
+      <td id="125_6-15:00-15:30"></td>
+      <td id="126_7-15:00-15:30"></td>
+      <td id="127_8-15:00-15:30"></td>
+      <td id="128_9-15:00-15:30"></td>
+      <td id="129_10-15:00-15:30"></td>
+      <td id="130_11-15:00-15:30"></td>
+      <td id="131_12-15:00-15:30"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">15:30-16:00</td>
+      <td id="132_1-15:30-16:00"></td>  
+      <td id="133_2-15:30-16:00"></td>
+      <td id="134_3-15:30-16:00"></td>
+      <td id="135_4-15:30-16:00"></td>
+      <td id="136_5-15:30-16:00"></td>
+      <td id="137_6-15:30-16:00"></td>
+      <td id="138_7-15:30-16:00"></td>
+      <td id="139_8-15:30-16:00"></td>
+      <td id="140_9-15:30-16:00"></td>
+      <td id="141_10-15:30-16:00"></td>
+      <td id="142_11-15:30-16:00"></td>
+      <td id="143_12-15:30-16:00"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">16:00-16:30</td>
+      <td id="144_1-16:00-16:30"></td>  
+      <td id="145_2-16:00-16:30"></td>
+      <td id="146_3-16:00-16:30"></td>
+      <td id="147_4-16:00-16:30"></td>
+      <td id="148_5-16:00-16:30"></td>
+      <td id="149_6-16:00-16:30"></td>
+      <td id="150_7-16:00-16:30"></td>
+      <td id="151_8-16:00-16:30"></td>
+      <td id="152_9-16:00-16:30"></td>
+      <td id="153_10-16:00-16:30"></td>
+      <td id="154_11-16:00-16:30"></td>
+      <td id="155_12-16:00-16:30"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">16:30-17:00</td>
+      <td id="156_1-16:30-17:00"></td>  
+      <td id="157_2-16:30-17:00"></td>
+      <td id="158_3-16:30-17:00"></td>
+      <td id="159_4-16:30-17:00"></td>
+      <td id="160_5-16:30-17:00"></td>
+      <td id="161_6-16:30-17:00"></td>
+      <td id="162_7-16:30-17:00"></td>
+      <td id="163_8-16:30-17:00"></td>
+      <td id="164_9-16:30-17:00"></td>
+      <td id="165_10-16:30-17:00"></td>
+      <td id="166_11-16:30-17:00"></td>
+      <td id="167_12-16:30-17:00"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">17:00-17:30</td>
+      <td id="168_1-17:00-17:30"></td>  
+      <td id="169_2-17:00-17:30"></td>
+      <td id="170_3-17:00-17:30"></td>
+      <td id="171_4-17:00-17:30"></td>
+      <td id="172_5-17:00-17:30"></td>
+      <td id="173_6-17:00-17:30"></td>
+      <td id="174_7-17:00-17:30"></td>
+      <td id="175_8-17:00-17:30"></td>
+      <td id="176_9-17:00-17:30"></td>
+      <td id="177_10-17:00-17:30"></td>
+      <td id="178_11-17:00-17:30"></td>
+      <td id="179_12-17:00-17:30"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">17:30-18:00</td>
+      <td id="180_1-17:30-18:00"></td>  
+      <td id="181_2-17:30-18:00"></td>
+      <td id="182_3-17:30-18:00"></td>
+      <td id="183_4-17:30-18:00"></td>
+      <td id="184_5-17:30-18:00"></td>
+      <td id="185_6-17:30-18:00"></td>
+      <td id="186_7-17:30-18:00"></td>
+      <td id="187_8-17:30-18:00"></td>
+      <td id="188_9-17:30-18:00"></td>
+      <td id="189_10-17:30-18:00"></td>
+      <td id="190_11-17:30-18:00"></td>
+      <td id="191_12-17:30-18:00"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">18:00-18:30</td>
+      <td id="192_1-18:00-18:30"></td>  
+      <td id="193_2-18:00-18:30"></td>
+      <td id="194_3-18:00-18:30"></td>
+      <td id="195_4-18:00-18:30"></td>
+      <td id="196_5-18:00-18:30"></td>
+      <td id="197_6-18:00-18:30"></td>
+      <td id="198_7-18:00-18:30"></td>
+      <td id="199_8-18:00-18:30"></td>
+      <td id="200_9-18:00-18:30"></td>
+      <td id="201_10-18:00-18:30"></td>
+      <td id="202_11-18:00-18:30"></td>
+      <td id="203_12-18:00-18:30"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">18:30-19:00</td>
+      <td id="204_1-18:30-19:00"></td>  
+      <td id="205_2-18:30-19:00"></td>
+      <td id="206_3-18:30-19:00"></td>
+      <td id="207_4-18:30-19:00"></td>
+      <td id="208_5-18:30-19:00"></td>
+      <td id="209_6-18:30-19:00"></td>
+      <td id="210_7-18:30-19:00"></td>
+      <td id="211_8-18:30-19:00"></td>
+      <td id="212_9-18:30-19:00"></td>
+      <td id="213_10-18:30-19:00"></td>
+      <td id="214_11-18:30-19:00"></td>
+      <td id="215_12-18:30-19:00"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">19:00-19:30</td>
+      <td id="216_1-19:00-19:30"></td>  
+      <td id="217_2-19:00-19:30"></td>
+      <td id="218_3-19:00-19:30"></td>
+      <td id="219_4-19:00-19:30"></td>
+      <td id="220_5-19:00-19:30"></td>
+      <td id="221_6-19:00-19:30"></td>
+      <td id="222_7-19:00-19:30"></td>
+      <td id="223_8-19:00-19:30"></td>
+      <td id="224_9-19:00-19:30"></td>
+      <td id="225_10-19:00-19:30"></td>
+      <td id="226_11-19:00-19:30"></td>
+      <td id="227_12-19:00-19:30"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">19:30-20:00</td>
+      <td id="228_1-19:30-20:00"></td>  
+      <td id="229_2-19:30-20:00"></td>
+      <td id="230_3-19:30-20:00"></td>
+      <td id="231_4-19:30-20:00"></td>
+      <td id="232_5-19:30-20:00"></td>
+      <td id="233_6-19:30-20:00"></td>
+      <td id="234_7-19:30-20:00"></td>
+      <td id="235_8-19:30-20:00"></td>
+      <td id="236_9-19:30-20:00"></td>
+      <td id="237_10-19:30-20:00"></td>
+      <td id="238_11-19:30-20:00"></td>
+      <td id="239_12-19:30-20:00"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">20:00-20:30</td>
+      <td id="240_1-20:00-20:30"></td>  
+      <td id="241_2-20:00-20:30"></td>
+      <td id="242_3-20:00-20:30"></td>
+      <td id="243_4-20:00-20:30"></td>
+      <td id="244_5-20:00-20:30"></td>
+      <td id="245_6-20:00-20:30"></td>
+      <td id="246_7-20:00-20:30"></td>
+      <td id="247_8-20:00-20:30"></td>
+      <td id="248_9-20:00-20:30"></td>
+      <td id="249_10-20:00-20:30"></td>
+      <td id="250_11-20:00-20:30"></td>
+      <td id="251_12-20:00-20:30"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">20:30-21:00</td>
+      <td id="252_1-20:30-21:00"></td>  
+      <td id="253_2-20:30-21:00"></td>
+      <td id="254_3-20:30-21:00"></td>
+      <td id="255_4-20:30-21:00"></td>
+      <td id="256_5-20:30-21:00"></td>
+      <td id="257_6-20:30-21:00"></td>
+      <td id="258_7-20:30-21:00"></td>
+      <td id="259_8-20:30-21:00"></td>
+      <td id="260_9-20:30-21:00"></td>
+      <td id="261_10-20:30-21:00"></td>
+      <td id="262_11-20:30-21:00"></td>
+      <td id="263_12-20:30-21:00"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">21:00-21:30</td>
+      <td id="264_1-21:00-21:30"></td>  
+      <td id="265_2-21:00-21:30"></td>
+      <td id="266_3-21:00-21:30"></td>
+      <td id="267_4-21:00-21:30"></td>
+      <td id="268_5-21:00-21:30"></td>
+      <td id="269_6-21:00-21:30"></td>
+      <td id="270_7-21:00-21:30"></td>
+      <td id="271_8-21:00-21:30"></td>
+      <td id="272_9-21:00-21:30"></td>
+      <td id="273_10-21:00-21:30"></td>
+      <td id="274_11-21:00-21:30"></td>
+      <td id="275_12-21:00-21:30"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">21:30-22:00</td>
+      <td id="276_1-21:30-22:00"></td>  
+      <td id="277_2-21:30-22:00"></td>
+      <td id="278_3-21:30-22:00"></td>
+      <td id="279_4-21:30-22:00"></td>
+      <td id="280_5-21:30-22:00"></td>
+      <td id="281_6-21:30-22:00"></td>
+      <td id="282_7-21:30-22:00"></td>
+      <td id="283_8-21:30-22:00"></td>
+      <td id="284_9-21:30-22:00"></td>
+      <td id="285_10-21:30-22:00"></td>
+      <td id="286_11-21:30-22:00"></td>
+      <td id="287_12-21:30-22:00"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">22:00-22:30</td>
+      <td id="288_1-22:00-22:30"></td>  
+      <td id="289_2-22:00-22:30"></td>
+      <td id="290_3-22:00-22:30"></td>
+      <td id="291_4-22:00-22:30"></td>
+      <td id="292_5-22:00-22:30"></td>
+      <td id="293_6-22:00-22:30"></td>
+      <td id="294_7-22:00-22:30"></td>
+      <td id="295_8-22:00-22:30"></td>
+      <td id="296_9-22:00-22:30"></td>
+      <td id="297_10-22:00-22:30"></td>
+      <td id="298_11-22:00-22:30"></td>
+      <td id="299_12-22:00-22:30"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">22:30-23:00</td>
+      <td id="300_1-22:30-23:00"></td>  
+      <td id="301_2-22:30-23:00"></td>
+      <td id="302_3-22:30-23:00"></td>
+      <td id="303_4-22:30-23:00"></td>
+      <td id="304_5-22:30-23:00"></td>
+      <td id="305_6-22:30-23:00"></td>
+      <td id="306_7-22:30-23:00"></td>
+      <td id="307_8-22:30-23:00"></td>
+      <td id="308_9-22:30-23:00"></td>
+      <td id="309_10-22:30-23:00"></td>
+      <td id="310_11-22:30-23:00"></td>
+      <td id="311_12-22:30-23:00"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">23:00-23:30</td>
+      <td id="312_1-23:00-23:30"></td>  
+      <td id="313_2-23:00-23:30"></td>
+      <td id="314_3-23:00-23:30"></td>
+      <td id="315_4-23:00-23:30"></td>
+      <td id="316_5-23:00-23:30"></td>
+      <td id="317_6-23:00-23:30"></td>
+      <td id="318_7-23:00-23:30"></td>
+      <td id="319_8-23:00-23:30"></td>
+      <td id="320_9-23:00-23:30"></td>
+      <td id="321_10-23:00-23:30"></td>
+      <td id="322_11-23:00-23:30"></td>
+      <td id="323_12-23:00-23:30"></td>
+    </tr>
+    <tr>
+      <td id="times" class="occupied">23:30-00:00</td>
+      <td id="324_1-23:30-00:00"></td>  
+      <td id="325_2-23:30-00:00"></td>
+      <td id="326_3-23:30-00:00"></td>
+      <td id="327_4-23:30-00:00"></td>
+      <td id="328_5-23:30-00:00"></td>
+      <td id="329_6-23:30-00:00"></td>
+      <td id="330_7-23:30-00:00"></td>
+      <td id="331_8-23:30-00:00"></td>
+      <td id="332_9-23:30-00:00"></td>
+      <td id="333_10-23:30-00:00"></td>
+      <td id="334_11-23:30-00:00"></td>
+      <td id="335_12-23:30-00:00"></td>
+    </tr>
+  </table>
+  
+  <div>  </div>
+
+  <div style="margin-bottom: 20px;">
+    <button id="book-btn">Забронировать</button>
+  </div>
+  
+  <table>
+    <tr>
+      <td id="times" class="occupied" style="background-color: rgb(238, 255, 0); color: black;">* Детские дорожки - 9/10/11/12</td>
+      <td id="times" class="occupied" style="background-color: red; color: aliceblue;">Дорожка занята</td>  
+      <td id="times" class="occupied" style="background-color: chartreuse; color: black;">Дорожка свободна</td>
+      <td id="times" class="occupied" style="background-color: blue; color: aliceblue;">Дорожка выбрана</td>
+    </tr>
+  </table>
+
+  <script>
+    // Получение строки параметров из текущего URL
+    var paramsString = document.location.search;  
+    // Преобразование строки параметров в объект для удобного доступа
+    var searchParams = new URLSearchParams(paramsString);
+    
+    // Вывод полученных значений "data" и "date" в консоль для отладки
+    // console.log('data: ', searchParams.get("data"));
+    // console.log('date: ', searchParams.get("date"));
+    
+    // Преобразование полученного значения "data" из формата JSON в объект JavaScript
+    let data = JSON.parse(searchParams.get("data"));
+    
+    // Вывод полученного значения "date" в элемент на странице с ID "date"
+    document.getElementById("date").innerHTML = searchParams.get("date"); 
+
+    // Получение всех ячеек таблицы, которые помечены как не занятые ("not occupied")
+    let cells = document.querySelectorAll('td:not(.occupied)');
+
+    // Перебор каждой ячейки
+    cells.forEach((cell, index) => {
+      // Если значение соответствующий индекс в данных равен 0
+      if(data[index] == 0) {
+        // Очистка содержимого ячейки и добавление класса freetime (свободное время)
+        cell.innerHTML = '';  
+        cell.classList.add('freetime');
+      } else {
+        // Если значение не равно нулю, добавление "X" в ячейку и класса occupied (занятое время)
+        cell.innerHTML = 'X'; 
+        cell.classList.add('occupied');
+      };
+    });
+
+    // Получение объекта webapp телеграма 
+    let tg = window.Telegram.WebApp; 
+
+    // Расширение телеграма на все окно 
+    tg.expand(); 
+
+    window.onload = function() {
+        // Получение кнопки по идентификатору
+        let bookBtn = document.getElementById('book-btn');
+        let cells = document.querySelectorAll('td:not(.occupied)');
+        let firstParts = [];
+        let secondParts = [];
+        let zakaz_data = [];
+        let cellIds = []; 
+        
+        // При клике на кнопку "бронь"...
+        bookBtn.addEventListener("click", () => {
+            // Создание объекта с данными бронирования
+            const zakaz_data = {
+              firstParts,
+              secondParts 
+            };
+            // Отправка данных бронирования в телеграм
+            tg.sendData(JSON.stringify(zakaz_data));
+            console.log('tg.sendData: ', JSON.stringify(data));
+            // Закрытие телеграм-приложения
+            tg.close();
+        });  
+      
+        // Для каждой незанятой ячейки...
+        for(let cell of cells) {
+
+          cell.addEventListener('click', function() {
+
+            // Получение идентификатора ячейки
+            let cellId = this.id;
+              
+            // Разделение идентификатора на две части
+            const idSplitIndex = cellId.indexOf('_');
+            const firstPart = parseInt(cellId.substring(0, idSplitIndex));
+            const secondPart = cellId.substring(idSplitIndex + 1);
+
+            // Если цвет фона ячейки не определен значит она незанята
+            if(this.style.backgroundColor == '') {
+                // Отметка ячейки как занятой
+                this.style.backgroundColor = 'blue';
+                
+                // Добавление идентификаторов в массивы
+                firstParts.push(firstPart);
+                secondParts.push(secondPart);
+            } else {
+                // Отметка ячейки как свободной 
+                this.style.backgroundColor = '';
+
+                // Удаление идентификаторов из массивов
+                firstParts = firstParts.filter(id => id !== firstPart);
+                secondParts = secondParts.filter(id => id !== secondPart); 
+              }
+          });
+        }
+      }    
+  </script>
+
+
+</body>
+</html>
