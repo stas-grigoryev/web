@@ -588,44 +588,46 @@
   </table>
 
   <script>
-    // function updateTime() {
-    //   var dt = new Date();
-
-    //   document.getElementById("ddmmyy").textContent = dt.getDate() + '.' + dt.getMonth() + '.' + dt.getFullYear().toString().padStart(2, "0");
-    //   document.getElementById("hours").textContent = dt.getHours().toString().padStart(2, "0");
-    //   document.getElementById("minutes").textContent = dt.getMinutes().toString().padStart(2, "0"); 
-    //   document.getElementById("seconds").textContent = dt.getSeconds().toString().padStart(2, "0");
-    // }
-
-    // setInterval(updateTime, 1000);
-
+    // Получение строки параметров из текущего URL
     var paramsString = document.location.search;  
+    // Преобразование строки параметров в объект для удобного доступа
     var searchParams = new URLSearchParams(paramsString);
-    console.log('data: ', searchParams.get("data"));
-    console.log('date: ', searchParams.get("date"));
-
+    
+    // Вывод полученных значений "data" и "date" в консоль для отладки
+    // console.log('data: ', searchParams.get("data"));
+    // console.log('date: ', searchParams.get("date"));
+    
+    // Преобразование полученного значения "data" из формата JSON в объект JavaScript
     let data = JSON.parse(searchParams.get("data"));
     
+    // Вывод полученного значения "date" в элемент на странице с ID "date"
     document.getElementById("date").innerHTML = searchParams.get("date"); 
 
-  
-    //  
+    // Получение всех ячеек таблицы, которые помечены как не занятые ("not occupied")
     let cells = document.querySelectorAll('td:not(.occupied)');
-    cells.forEach((cell, index) => {
 
+    // Перебор каждой ячейки
+    cells.forEach((cell, index) => {
+      // Если значение соответствующий индекс в данных равен 0
       if(data[index] == 0) {
+        // Очистка содержимого ячейки и добавление класса freetime (свободное время)
         cell.innerHTML = '';  
         cell.classList.add('freetime');
       } else {
-            cell.innerHTML = 'X'; 
-            cell.classList.add('occupied');
+        // Если значение не равно нулю, добавление "X" в ячейку и класса occupied (занятое время)
+        cell.innerHTML = 'X'; 
+        cell.classList.add('occupied');
       };
     });
 
-    let tg = window.Telegram.WebApp; //получаем объект webapp телеграма 
-    tg.expand(); //расширяем на все окно  
+    // Получение объекта webapp телеграма 
+    let tg = window.Telegram.WebApp; 
+
+    // Расширение телеграма на все окно 
+    tg.expand(); 
 
     window.onload = function() {
+        // Получение кнопки по идентификатору
         let bookBtn = document.getElementById('book-btn');
         let cells = document.querySelectorAll('td:not(.occupied)');
         let firstParts = [];
@@ -633,47 +635,50 @@
         let zakaz_data = [];
         let cellIds = []; 
         
+        // При клике на кнопку "бронь"...
         bookBtn.addEventListener("click", () => {
+            // Создание объекта с данными бронирования
             const zakaz_data = {
               firstParts,
               secondParts 
             };
+            // Отправка данных бронирования в телеграм
             tg.sendData(JSON.stringify(zakaz_data));
             console.log('tg.sendData: ', JSON.stringify(data));
+            // Закрытие телеграм-приложения
             tg.close();
         });  
       
+        // Для каждой незанятой ячейки...
         for(let cell of cells) {
 
           cell.addEventListener('click', function() {
 
-              let cellId = this.id;
+            // Получение идентификатора ячейки
+            let cellId = this.id;
               
-              const idSplitIndex = cellId.indexOf('_');
-              const firstPart = parseInt(cellId.substring(0, idSplitIndex));
-              const secondPart = cellId.substring(idSplitIndex + 1);
+            // Разделение идентификатора на две части
+            const idSplitIndex = cellId.indexOf('_');
+            const firstPart = parseInt(cellId.substring(0, idSplitIndex));
+            const secondPart = cellId.substring(idSplitIndex + 1);
 
-              if(this.style.backgroundColor == '') {
-                  
+            // Если цвет фона ячейки не определен значит она незанята
+            if(this.style.backgroundColor == '') {
+                // Отметка ячейки как занятой
                 this.style.backgroundColor = 'blue';
                 
+                // Добавление идентификаторов в массивы
                 firstParts.push(firstPart);
                 secondParts.push(secondPart);
-                console.log('After select: ', firstParts, secondParts, cellId);
-
-              } else {
-
+            } else {
+                // Отметка ячейки как свободной 
                 this.style.backgroundColor = '';
-                
+
+                // Удаление идентификаторов из массивов
                 firstParts = firstParts.filter(id => id !== firstPart);
                 secondParts = secondParts.filter(id => id !== secondPart); 
-                console.log('After deselect: ', firstParts, secondParts);
-
-
               }
-
           });
-
         }
       }    
   </script>
