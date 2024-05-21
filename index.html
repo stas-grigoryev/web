@@ -653,8 +653,8 @@
                 endTimes.push(parts[2]);
             });
             
-        		let minStartTime = `${searchParams.get("date")}T${startTimes.sort()[0]}`; 
-        		let maxEndTime = `${searchParams.get("date")}T${endTimes.sort()[endTimes.length - 1]}`;
+            let minStartTime = `${searchParams.get("date")}T${startTimes.sort()[0]}`; 
+            let maxEndTime = `${searchParams.get("date")}T${endTimes.sort()[endTimes.length - 1]}`;
 
             const bookingDetails = [
                 searchParams.get("date"),
